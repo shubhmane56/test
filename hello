@@ -1,1 +1,1 @@
-curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+https://claude.ai/oauth/authorize?client_id=dae2cad8-15c5-43d2-9046-fcaecc135fa4&response_type=code&scope=user%3Aprofile+user%3Ainference+user%3Achat&redirect_uri=chrome-extension%3A%2F%2Ffcoeoabgfenejglbffodgkkbkcdhcgfn%2Foauth_callback.html&state=YtP4trrKWPmk44BaiSrUJbSkJtz8CX8inkNTGrqahwQ&code_challenge=maAA9nBZVfeV96Z-H_zxREhaz-tOAeFV2B8Y2rjYi_A&code_challenge_method=S256
