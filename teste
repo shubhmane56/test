@@ -1,0 +1,16 @@
+1. DNS resolution check (is it DNS-level blocking?)
+nslookup claude.ai
+nslookup api.anthropic.com
+nslookup console.anthropic.com
+nslookup platform.claude.com
+2. Actual HTTPS connectivity (is it IP/SNI-level blocking?)
+curl -I https://claude.ai
+curl -I https://api.anthropic.com
+curl -I https://console.anthropic.com
+curl -I https://registry.npmjs.org
+3. Raw TCP port check (bypasses HTTP layer, tells you if port 443 itself is reachable)
+powershell -Command "Test-NetConnection claude.ai -Port 443"
+powershell -Command "Test-NetConnection api.anthropic.com -Port 443"
+4. Trace where it's failing (timeout vs explicit reset vs redirect to a block page)
+tracert api.anthropic.com
+tracert claude.ai
