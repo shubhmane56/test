@@ -1,3 +1,1 @@
-[index=github url IN ("*.enterprise.githubcopilot.com*", "*api.github.com/copilot_internal*", "*api.github.com/user*", "*github.com/login*", "*copilot-proxy.githubusercontent.com*", "*origin-tracker.githubusercontent.com*", "*copilot-telemetry.githubusercontent.com*", "*default.exp-tas.com*")
-| stats count by user, action
-](https://claude.ai/oauth/authorize?client_id=dae2cad8-15c5-43d2-9046-fcaecc135fa4&response_type=code&scope=user%3Aprofile+user%3Ainference+user%3Achat&redirect_uri=chrome-extension%3A%2F%2Ffcoeoabgfenejglbffodgkkbkcdhcgfn%2Foauth_callback.html&state=FwqSHiJuEvyqbFJH6FegZQKgYmJa66ST89acNDfJ3vA&code_challenge=V1bctVo2AiO7-y0_HjqFmZLW83lk8sM1SD-egAOzIaU&code_challenge_method=S256)
+curl -i https://api.anthropic.com/v1/messages -H "x-api-key: test" -H "anthropic-version: 2023-06-01" -H "content-type: application/json" -d "{\"model\":\"claude-sonnet-5\",\"max_tokens\":10,\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}]}"
