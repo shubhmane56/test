@@ -2,9 +2,13 @@
 ai_domain_checker.py
 
 Purpose:
-    Test connectivity to a list of .ai / AI-related domains from the current
-    network to determine which are BLOCKED and which are ALLOWED by your
-    company's firewall, proxy, or web-filtering policy.
+    Test connectivity to a broad list of AI-related domains (chatbots, coding
+    assistants, image/video/voice generators, writing tools, etc.) from the
+    current network to determine which are BLOCKED and which are ALLOWED by
+    your company's firewall, proxy, or web-filtering policy.
+
+    Useful for spotting "shadow AI" - unapproved AI tools that employees may
+    be using outside of sanctioned/company-approved services.
 
     This performs read-only checks only:
       1. DNS resolution of the domain.
@@ -34,38 +38,109 @@ from datetime import datetime
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-# Default list of commonly used AI-related domains.
+# Default list of AI-related domains, grouped by category for readability.
 # Edit this list, or supply your own with --input domains.txt
 DEFAULT_DOMAINS = [
+    # --- OpenAI ---
     "openai.com",
     "chat.openai.com",
     "chatgpt.com",
+    "platform.openai.com",
+    # --- Anthropic (Claude) ---
     "claude.ai",
     "anthropic.com",
-    "perplexity.ai",
-    "character.ai",
-    "huggingface.co",
-    "midjourney.com",
-    "runwayml.com",
-    "poe.com",
-    "you.com",
-    "copilot.microsoft.com",
+    "console.anthropic.com",
+    # --- Google ---
     "bard.google.com",
     "gemini.google.com",
-    "stability.ai",
-    "replicate.com",
+    "aistudio.google.com",
+    "labs.google",
+    # --- Microsoft ---
+    "copilot.microsoft.com",
+    "copilot.cloud.microsoft",
+    # --- xAI ---
+    "x.ai",
+    "grok.com",
+    # --- Meta ---
+    "meta.ai",
+    # --- Perplexity ---
+    "perplexity.ai",
+    # --- Mistral ---
+    "mistral.ai",
+    "chat.mistral.ai",
+    "lechat.mistral.ai",
+    # --- DeepSeek ---
+    "deepseek.com",
+    "chat.deepseek.com",
+    # --- Alibaba Qwen ---
+    "qwen.ai",
+    "chat.qwen.ai",
+    "tongyi.aliyun.com",
+    # --- Baidu ---
+    "yiyan.baidu.com",
+    "ernie.baidu.com",
+    # --- Zhipu / Moonshot (Chinese AI assistants) ---
+    "chatglm.cn",
+    "moonshot.cn",
+    "moonshot.ai",
+    "kimi.moonshot.cn",
+    "kimi.ai",
+    # --- Inflection ---
+    "pi.ai",
+    "inflection.ai",
+    # --- Character / general chat ---
+    "character.ai",
+    "poe.com",
+    "you.com",
+    # --- Model providers / infra ---
+    "groq.com",
+    "together.ai",
+    "cohere.com",
     "cohere.ai",
-    "jasper.ai",
-    "writesonic.com",
-    "notion.ai",
-    "deepl.com",
+    "ai21.com",
+    "huggingface.co",
+    # --- AI coding assistants ---
+    "cursor.sh",
+    "cursor.com",
+    "tabnine.com",
+    "codeium.com",
+    "windsurf.com",
+    "sourcegraph.com",
+    "replit.com",
+    "v0.dev",
+    "bolt.new",
+    "lovable.dev",
+    # --- Image / video / voice generation ---
+    "midjourney.com",
+    "stability.ai",
+    "dreamstudio.ai",
+    "runwayml.com",
+    "pika.art",
+    "lumalabs.ai",
+    "firefly.adobe.com",
+    "leonardo.ai",
     "elevenlabs.io",
     "synthesia.io",
+    "suno.ai",
+    "udio.com",
     "descript.com",
-    "otter.ai",
+    # --- Writing / productivity ---
+    "notion.ai",
+    "jasper.ai",
+    "writesonic.com",
+    "copy.ai",
+    "rytr.me",
+    "grammarly.com",
+    "quillbot.com",
     "gamma.app",
-    "leonardo.ai",
+    "otter.ai",
+    "fireflies.ai",
+    # --- Translation ---
+    "deepl.com",
+    # --- Misc / aggregators ---
     "phind.com",
+    "replicate.com",
+    "abacus.ai",
 ]
 
 
