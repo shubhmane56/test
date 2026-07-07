@@ -1,0 +1,1 @@
+https://claude.ai/oauth/authorize?client_id=dae2cad8-15c5-43d2-9046-fcaecc135fa4&response_type=code&scope=user%3Aprofile+user%3Ainference+user%3Achat&redirect_uri=chrome-extension%3A%2F%2Ffcoeoabgfenejglbffodgkkbkcdhcgfn%2Foauth_callback.html&state=Xz1oFPp51zb2RsdBGT6klBktNrbrViAc61k_balmmPg&code_challenge=GMo2Q7p1aP5LFNA0-Tuoh10Hun0j6JLGcpiG-aekXmo&code_challenge_method=S256
